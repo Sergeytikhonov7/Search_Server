@@ -146,14 +146,6 @@ public:
         return document_ids_.end();
     }
 
-    auto Map() {
-        return word_to_document_freqs_;
-    }
-
-    auto Map2() {
-        return id_to_words_freqs;
-    }
-
 private:
     struct DocumentData {
         int rating;
