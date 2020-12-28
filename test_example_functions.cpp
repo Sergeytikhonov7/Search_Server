@@ -66,18 +66,12 @@ void MatchDocuments(const SearchServer& search_server, const std::string& query)
 void TestProcessQueries() {
     SearchServer search_server("and with"s);
 
-    for (
-            int id = 0;
-            const std::string& text : {
-            "funny pet and nasty rat"s,
-            "funny pet with curly hair"s,
-            "funny pet and not very nasty rat"s,
-            "pet with rat and rat and rat"s,
-            "nasty rat with curly hair"s,
-    }
-            ) {
-        search_server.AddDocument(++id, text, DocumentStatus::ACTUAL, {1, 2});
-    }
+    search_server.AddDocument(1, "funny pet and nasty rat"s, DocumentStatus::ACTUAL, {1, 2});
+    search_server.AddDocument(2, "funny pet with curly hair"s, DocumentStatus::ACTUAL, {1, 2});
+    search_server.AddDocument(3, "funny pet and not very nasty rat"s, DocumentStatus::ACTUAL, {1, 2});
+    search_server.AddDocument(4, "pet with rat and rat and rat"s, DocumentStatus::ACTUAL, {1, 2});
+    search_server.AddDocument(5, "nasty rat with curly hair"s, DocumentStatus::ACTUAL, {1, 2});
+
 
     const std::vector<std::string> queries = {
             "nasty rat -not"s,
@@ -96,18 +90,11 @@ void TestProcessQueries() {
 void TestProcessQueriesJoined() {
     SearchServer search_server("and with"s);
 
-    for (
-            int id = 0;
-            const std::string& text : {
-            "funny pet and nasty rat"s,
-            "funny pet with curly hair"s,
-            "funny pet and not very nasty rat"s,
-            "pet with rat and rat and rat"s,
-            "nasty rat with curly hair"s,
-    }
-            ) {
-        search_server.AddDocument(++id, text, DocumentStatus::ACTUAL, {1, 2});
-    }
+    search_server.AddDocument(1, "funny pet and nasty rat"s, DocumentStatus::ACTUAL, {1, 2});
+    search_server.AddDocument(2, "funny pet with curly hair"s, DocumentStatus::ACTUAL, {1, 2});
+    search_server.AddDocument(3, "funny pet and not very nasty rat"s, DocumentStatus::ACTUAL, {1, 2});
+    search_server.AddDocument(4, "pet with rat and rat and rat"s, DocumentStatus::ACTUAL, {1, 2});
+    search_server.AddDocument(5, "nasty rat with curly hair"s, DocumentStatus::ACTUAL, {1, 2});
 
     const std::vector<std::string> queries = {
             "nasty rat -not"s,
@@ -132,18 +119,11 @@ Document 5 matched with relevance 0.458145*/
 void TestRemoveFunction() {
     SearchServer search_server("and with"s);
 
-    for (
-            int id = 0;
-            const std::string& text : {
-            "funny pet and nasty rat"s,
-            "funny pet with curly hair"s,
-            "funny pet and not very nasty rat"s,
-            "pet with rat and rat and rat"s,
-            "nasty rat with curly hair"s,
-    }
-            ) {
-        search_server.AddDocument(++id, text, DocumentStatus::ACTUAL, {1, 2});
-    }
+    search_server.AddDocument(1, "funny pet and nasty rat"s, DocumentStatus::ACTUAL, {1, 2});
+    search_server.AddDocument(2, "funny pet with curly hair"s, DocumentStatus::ACTUAL, {1, 2});
+    search_server.AddDocument(3, "funny pet and not very nasty rat"s, DocumentStatus::ACTUAL, {1, 2});
+    search_server.AddDocument(4, "pet with rat and rat and rat"s, DocumentStatus::ACTUAL, {1, 2});
+    search_server.AddDocument(5, "nasty rat with curly hair"s, DocumentStatus::ACTUAL, {1, 2});
 
     const std::string query = "curly and funny"s;
 
@@ -171,18 +151,11 @@ void TestRemoveFunction() {
 void TestMatchDocument() {
     SearchServer search_server("and with"s);
 
-    for (
-            int id = 0;
-            const std::string& text : {
-            "funny pet and nasty rat"s,
-            "funny pet with curly hair"s,
-            "funny pet and not very nasty rat"s,
-            "pet with rat and rat and rat"s,
-            "nasty rat with curly hair"s,
-    }
-            ) {
-        search_server.AddDocument(++id, text, DocumentStatus::ACTUAL, {1, 2});
-    }
+    search_server.AddDocument(1, "funny pet and nasty rat"s, DocumentStatus::ACTUAL, {1, 2});
+    search_server.AddDocument(2, "funny pet with curly hair"s, DocumentStatus::ACTUAL, {1, 2});
+    search_server.AddDocument(3, "funny pet and not very nasty rat"s, DocumentStatus::ACTUAL, {1, 2});
+    search_server.AddDocument(4, "pet with rat and rat and rat"s, DocumentStatus::ACTUAL, {1, 2});
+    search_server.AddDocument(5, "nasty rat with curly hair"s, DocumentStatus::ACTUAL, {1, 2});
 
     const std::string query = "curly and funny -not"s;
 

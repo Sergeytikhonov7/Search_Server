@@ -76,47 +76,4 @@ int main() {
     TestProcessQueriesJoined();
     TestRemoveFunction();
     TestMatchDocument();
-    SearchServer search_server("и в на"s);
-
-    AddDocument(search_server, 1, "пушистый кот пушистый хвост"s, DocumentStatus::ACTUAL, { 7, 2, 7 });
-    AddDocument(search_server, 1, "пушистый пёс и модный ошейник"s, DocumentStatus::ACTUAL, { 1, 2 });
-    AddDocument(search_server, -1, "пушистый пёс и модный ошейник"s, DocumentStatus::ACTUAL, { 1, 2 });
-    AddDocument(search_server, 3, "большой пёс скво\x12рец евгений"s, DocumentStatus::ACTUAL, { 1, 3, 2 });
-    AddDocument(search_server, 4, "большой пёс скворец евгений"s, DocumentStatus::ACTUAL, { 1, 1, 1 });
-
-    FindTopDocuments(search_server, "пушистый -пёс"s);
-    FindTopDocuments(search_server, "пушистый --кот"s);
-    FindTopDocuments(search_server, "пушистый -"s);
-
-    MatchDocuments(search_server, "пушистый пёс"s);
-    MatchDocuments(search_server, "модный -кот"s);
-    MatchDocuments(search_server, "модный --пёс"s);
-    MatchDocuments(search_server, "пушистый - хвост"s);
-   TestMatchDocument();
-    SearchServer search_server2("and with"s);
-    search_server.AddDocument(1, "white cat and yellow hat"s, DocumentStatus::ACTUAL, {1, 2});
-    search_server.AddDocument(2, "curly cat curly tail"s, DocumentStatus::ACTUAL, {1, 2});
-    search_server.AddDocument(3, "nasty dog with big eyes"s, DocumentStatus::ACTUAL, {1, 2});
-    search_server.AddDocument(4, "nasty pigeon john"s, DocumentStatus::ACTUAL, {1, 2});
-
-    cout << "ACTUAL by default:"s << endl;
-    // последовательная версия
-    for (const Document& document : search_server2.FindTopDocuments("curly nasty cat"s)) {
-        PrintDocument(document);
-    }
-    cout << "BANNED:"s << endl;
-    // последовательная версия
-    for (const Document& document : search_server2.FindTopDocuments(execution::seq, "curly nasty cat"s,
-                                                                    DocumentStatus::BANNED)) {
-        PrintDocument(document);
-    }
-
-    cout << "Even ids:"s << endl;
-    // параллельная версия
-    for (const Document& document : search_server2.FindTopDocuments(execution::par, "curly nasty cat"s,
-                                                                    [](int document_id, DocumentStatus status,
-                                                                       int rating) { return document_id % 2 == 0; })) {
-        PrintDocument(document);
-    }
-
 }

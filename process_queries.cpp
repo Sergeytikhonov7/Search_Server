@@ -20,10 +20,5 @@ std::vector<Document> ProcessQueriesJoined(const SearchServer& search_server, co
             result[id++] = std::move(doc);
         }
     }
-    /* vector<Document> documents;
-    for (const auto& local_documents : ProcessQueries(search_server, queries)) {
-        documents.insert(documents.end(), local_documents.begin(), local_documents.end());
-    }
-    return documents;*/
     return result;
 }
